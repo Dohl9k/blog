@@ -5,6 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-
+    {% extends "blogs/base.html" %}
+    {% block content %}
+        <p>Edit blog:</p>
+        <form action="{% url 'blogs:edit_blog' blog.id %}" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">save changes</button>
+        </form>
+    {% endblock content %}
 </body>
 </html>

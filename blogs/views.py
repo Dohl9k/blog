@@ -25,20 +25,20 @@ def add_blog(request):
     context = {'form': form}
     return render(request, 'blogs/add_blog.html', context)
 
-def edit_blog(request, entry_id):
+
+def edit_blog(request, blog_id):
     """Редактирует существующую запись."""
-    entry = Entry.objects.get(id=entry_id)
-    topic = entry.topic
+    blog = BlogPost.objects.get(id=blog_id)
     if request.method != 'POST':
         # Исходный запрос; форма заполняется данными текущей записи.
-        form = EntryForm(instance=entry)
+        form = BlogForm(instance=blog)
     else:
         # Отправка данных POST; обработать данные.
-        form = EntryForm(instance=entry, data=request.POST)
+        form = BlogForm(instance=blog, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('learning_logs:topic', topic_id=topic.id)
-    context = {'entry': entry, 'topic': topic, 'form': form}
-    return render(request, 'learning_logs/edit_entry.html', context)
+            return redirect('blogs:index', blog_id=blog.id)
+    context = {'form': form, 'blog': blog}
+    return render(request, 'blogs/edit_blog.html', context)
 
 

@@ -17,7 +17,7 @@
                 <p>{{ blog.title }}</p>
                 <p>{{ blog.text|linebreaks }}</p>
                 <p>
-                <a href="{% url 'blogs:edit_blog'  %}">Edit blog</a>
+                <a href="{% url 'blogs:edit_blog' blog.id %}">Edit blog</a>
                 </p>
             </li>
             {% empty %}
