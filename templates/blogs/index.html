@@ -6,24 +6,40 @@
 </head>
 <body>
     {% extends "blogs/base.html" %}
+    {% block page_header %}
+        <h1>Blogs</h1>
+    {% endblock page_header %}
     {% block content %}
-        <p>Blogs</p>
         <p>
             <a href="{% url 'blogs:add_blog' %}">add new blog</a>
         </p>
-        <ul>
-            {% for blog in blogs %}
-                <li>
-                    <p>{{ blog.title }}</p>
-                    <p>{{ blog.text|linebreaks }}</p>
-                    <p>
-                    <a href="{% url 'blogs:edit_blog' blog.id %}">Edit blog</a>
-                    </p>
-                </li>
-            {% empty %}
-                <li>No blogs have been added yet.</li>
-            {% endfor %}
-        </ul>
+{#        <ul>#}
+{#            {% for blog in blogs %}#}
+{#                <li>#}
+{#                    <p>{{ blog.title }}</p>#}
+{#                    <p>{{ blog.text|linebreaks }}</p>#}
+{#                    <p>#}
+{#                    <a href="{% url 'blogs:edit_blog' blog.id %}">Edit blog</a>#}
+{#                    </p>#}
+{#                </li>#}
+{#            {% empty %}#}
+{#                <li>No blogs have been added yet.</li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+        {% for blog in blogs %}
+            <div class="card mb-3">
+                <h4 class="card-header">
+                    {{ blog.title }}
+                    <small><a href="{% url 'blogs:edit_blog' blog.id %}">
+                        Edit blog</a></small>
+                </h4>
+                <div class="card-body">
+                    {{ blog.text|linebreaks }}
+                </div>
+            </div>
+        {% empty %}
+            <p>There are no entries for this topic yet.</p>
+        {% endfor %}
     {% endblock content %}
 </body>
 </html>
