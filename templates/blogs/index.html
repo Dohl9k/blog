@@ -13,15 +13,15 @@
         </p>
         <ul>
             {% for blog in blogs %}
-            <li>
-                <p>{{ blog.title }}</p>
-                <p>{{ blog.text|linebreaks }}</p>
-                <p>
-                <a href="{% url 'blogs:edit_blog' blog.id %}">Edit blog</a>
-                </p>
-            </li>
+                <li>
+                    <p>{{ blog.title }}</p>
+                    <p>{{ blog.text|linebreaks }}</p>
+                    <p>
+                    <a href="{% url 'blogs:edit_blog' blog.id %}">Edit blog</a>
+                    </p>
+                </li>
             {% empty %}
-            <li>No blogs have been added yet.</li>
+                <li>No blogs have been added yet.</li>
             {% endfor %}
         </ul>
     {% endblock content %}
