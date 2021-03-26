@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
@@ -36,7 +36,7 @@ def add_blog(request):
 @login_required
 def edit_blog(request, blog_id):
     """Редактирует существующую запись."""
-    blog = BlogPost.objects.get(id=blog_id)
+    blog = get_object_or_404(BlogPost, id=blog_id)
     if blog.owner != request.user:
         raise Http404
     if request.method != 'POST':
